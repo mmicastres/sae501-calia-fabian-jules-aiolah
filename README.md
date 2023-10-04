@@ -1,1 +1,11 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-718a45dd9cf7e7f842a935f5ebbe5719a5e09af4491e668f4dbf3b35d5cca122.svg)](https://classroom.github.com/online_ide?assignment_repo_id=12203707&assignment_repo_type=AssignmentRepo)
+
+# APPLICATION MOBILE CASTRES AU TRESOR - MMI NOVA
+
+Nous avons pour projet de réaliser une application mobile qui s'appelle Castres au trésor. Cette application a pour but de faire découvrir Castres à son utilisateur, de découvrir de nouveaux lieux et de s'amuser de manière ludique. Elle a ainsi pour cible les Castrais ainsi que les touristes.<br><br>
+
+L'application utilise les fonctionnalités de géolocalisation de manière à jouer au jeu de chaud/froid. En effet, l'utilisateur pourra accéder à une mini-map ainsi qu'à une photo floutée du lieu qu'il souhaite découvrir. Une boussole apparaîtra pour le guider dans la bonne direction sur 100m. Puis, une fois ces 100m passés, un thermomètre remplacera la boussole et indiquera la température relative à sa position et à la position du lieu cible. Plus l'utilisateur sera proche du lieu, plus la température sera élevée. A l'inverse, plus l'utilisateur sera éloigné du lieu, plus la température sera basse. Ainsi, grâce à la boussole et au thermomètre, l'utilisateur pourra accéder au lieu à l'aide de son téléphone portable.<br><br>
+
+Cette application possède un système de récompenses au fur et à mesure que l'utilisateur découvre des lieux. Il débloquera des badges et un petit certificat personnalisé à chaque catégorie de lieux complétée.<br><br>
+
+Il sera nécessaire de se créer un compte à l'aide d'une adresse mail et d'un mot de passe pour accéder à l'application. Cela est nécessaire car l'utilisateur recevra les certificats par mail de manière à pouvoir les imprimer.
