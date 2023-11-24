@@ -66,4 +66,14 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+    implementation("androidx.compose.runtime:runtime-rxjava3:1.5.4")
+    implementation ("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0-rc01")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.7.1")
+    implementation("androidx.compose.runtime:runtime-livedata:1.5.4")
+    implementation("androidx.compose.runtime:runtime-rxjava2:1.5.4")
+
+    implementation ("androidx.compose.runtime:runtime:1.5.4")
+
+
 }
