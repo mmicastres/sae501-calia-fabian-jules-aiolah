@@ -8,6 +8,6 @@ import okhttp3.Credentials
 import okhttp3.Interceptor
 
 interface Api {
-    @POST("aiolah_castres_au_tresor_categories/_find")
+    @GET("categories")
     suspend fun categories(): Categories
 }
