@@ -6,5 +6,7 @@ data class Categories(
 )
 
 data class Categorie(
-    val nom: String = ""
+    val nom: String = "",
+    val chemin: String = "",
+    val contentDescription: String = ""
 )
