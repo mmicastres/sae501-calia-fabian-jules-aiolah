@@ -31,10 +31,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "CASTRES AU TRÉSOR :) !",
-        modifier = modifier
-    )
+    LieuxMystere()
 }
 
 @Preview(showBackground = true)
