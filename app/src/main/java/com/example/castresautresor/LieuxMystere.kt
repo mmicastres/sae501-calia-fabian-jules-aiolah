@@ -27,24 +27,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.launch
 
-@Composable
-fun LieuMystere(lieuxMystere: ApiLieux) {
-    Row {
-        Text(text = lieuxMystere.idLieuxMystere)
 
-    }
-}
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LieuxMystere() {
+fun LieuxMystere(navController: NavHostController) {
     val viewModel = MainViewModel()
     //Appel de viewModel.getLieuxMystere() une seule fois => Première apparition du composant LieuxMystere
     val lieuMystere by viewModel.lieuxmystere.collectAsStateWithLifecycle()
@@ -56,7 +46,7 @@ fun LieuxMystere() {
             val imageurl = "https://webmmi.iut-tlse3.fr/~clc4232a/S5/SAE501/" + lieumystere.imageUrl
             items(1){
                 Card(
-                    //onClick = {navController.navigate("lieu/${lieumystere.idLieu}")},
+                    onClick = {navController.navigate("lieu/${lieumystere.idLieu}")},
                     border = BorderStroke(1.dp, Color.LightGray),
                     colors = CardDefaults.cardColors(containerColor = Color.White),
                     modifier = Modifier
@@ -93,16 +83,16 @@ fun LieuxMystere() {
     }
 
 }
-/*
+
 @Composable
-fun LieuMystere(idLieux:String, viewModel:MainViewModel){
-    Text(text = idLieux)
-    val lieumystere by viewModel.lieuxmystere.collectAsStateWithLifecycle()
-    LaunchedEffect(key1 = true) { viewModel.getLieuMystere(idLieux) }
+fun LieuMystere(idLieu:String, viewModel:MainViewModel){
+    Text(text = idLieu)
+    val lieumystere by viewModel.lieumystere.collectAsStateWithLifecycle()
+    LaunchedEffect(key1 = true) { viewModel.getLieuMystere(idLieu) }
 
 
     Text(
-        text = "text",
+        text = lieumystere.idLieu,
         textAlign = TextAlign.Center,
         fontWeight = FontWeight.Bold,
         modifier = Modifier
@@ -110,4 +100,3 @@ fun LieuMystere(idLieux:String, viewModel:MainViewModel){
             .padding(vertical = 8.dp)
     )
 }
-*/

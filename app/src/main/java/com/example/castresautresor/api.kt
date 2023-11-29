@@ -9,6 +9,6 @@ interface Api{
     @GET("/lieux")
     suspend fun lieuxmystere():ApiLieuxResult
 
-    @GET("lieux/{id}")
-    suspend fun lieumystere(@Path("id") id:String) : ApiLieux
+    @GET("lieu/{idLieu}")
+    suspend fun lieumystere(@Path("idLieu") id:String) : ApiLieux
 }
