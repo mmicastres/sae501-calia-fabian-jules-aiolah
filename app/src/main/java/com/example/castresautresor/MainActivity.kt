@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
+import androidx.core.widget.EdgeEffectCompat.getDistance
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.location.*
 import kotlinx.coroutines.launch
@@ -26,11 +27,17 @@ class MainActivity : ComponentActivity() {
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private var lon by mutableStateOf<Double?>(null)
     private var lat by mutableStateOf<Double?>(null)
+
+    private var pos1 by mutableStateOf(Position(44.3455, 2.5936))
+
     private val locationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
             val lastLocation = locationResult.lastLocation
             lon = lastLocation?.longitude
             lat = lastLocation?.latitude
+            pos1.latitude = lat!!
+            pos1.longitude = lon!!
+
         }
     }
 
@@ -39,10 +46,12 @@ class MainActivity : ComponentActivity() {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
         setContent {
-            var pos1 = Position(44.3455, 2.5936)
-            val pos2 = Position(43.9202, 2.1487)
-            val angle = pos1.getAngle(pos2)
-            Log.e("distance", angle.toString())
+
+           // Create the reference point from which we calculate distance
+            val pos2 = Position(43.6223, 2.2589)
+
+           val angle = pos1.getAngle(pos2)
+           Log.e("distance", angle.toString())
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -54,12 +63,17 @@ class MainActivity : ComponentActivity() {
                     Text(text = if (lon != null && lat != null) "Stop Location Updates" else "Start Location Updates")
                 }
                 Spacer(modifier = Modifier.height(16.dp))
+                Log.e("Position 1", pos1.toString())
+                Log.e("Calcul", pos1.getDistance(pos2).toInt().toString())
+                DisplayThermo(point = pos1, point2 = pos2)
                 if (lon != null && lat != null) {
-                    map()
+                    DisplayLocation(title = "Localisation")
                 }
             }
         }
     }
+
+    // Location management
 
     @Composable
     fun DisplayLocation(title: String) {
@@ -73,6 +87,14 @@ class MainActivity : ComponentActivity() {
 
         }
     }
+
+    @Composable
+    fun DisplayThermo(point : Position, point2 : Position){
+        if (point.getDistance(point2).toInt() < 100){
+            Text(text = point.getDistance(point2).toString())
+    }
+    }
+
 
     private fun toggleLocationUpdates() {
         lifecycleScope.launch {

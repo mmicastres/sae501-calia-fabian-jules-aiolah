@@ -1,20 +1,29 @@
 package com.example.castresautresor
 
 import android.util.Log
+import org.w3c.dom.Text
 
 class Position(latitude : Double, longitude : Double){
     var latitude = latitude*(Math.PI/180)
+        get() = field ;
+
+        set(value) {
+            field = value*(Math.PI/180)
+        }
     var longitude = longitude*(Math.PI/180)
-    get() = field
-    override fun toString():String{
-        return ("x = ${latitude}, y = ${longitude}")
-    }
+    get() = field ;
+
+        set(value) {
+            field = value*(Math.PI/180)
+        }
     fun getDistance(position : Position):Double{
         val lattt = Math.cos(position.longitude-longitude)
         val intermediaire = Math.sin(latitude)*Math.sin(position.latitude)+Math.cos(latitude)*Math.cos(position.latitude)*lattt
         val Sab = 6378307 * Math.acos(intermediaire)
         return Sab
     }
+
+
     fun getAngle(position: Position):Double{
 
         var thirdSpot = Position(latitude*(180/Math.PI), position.longitude*(180/Math.PI))
@@ -27,5 +36,11 @@ class Position(latitude : Double, longitude : Double){
         val result = Math.acos(division)*(180/Math.PI)
         if(latitude>position.latitude){return 180-result}
         else return result
+    }
+
+
+
+    override fun toString():String{
+        return ("x = ${latitude}, y = ${longitude}")
     }
 }
