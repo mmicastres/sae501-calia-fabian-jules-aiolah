@@ -1,12 +1,17 @@
 package com.example.castresautresor
 
-data class ApiLieuxMystereResult(
-    val docs: List<ApiLieuxMystere> = listOf()
+data class ApiLieuxResult(
+    val docs: List<ApiLieux> = listOf(),
 )
 
-data class ApiLieuxMystere(
+data class ApiLieux(
+    val _id: String = "",
     val categorie: String = "",
     val description: String = "",
-    val idLieuxMystère: String = "",
-    val imageUrl: String = ""
+    val descriptionMystere: String = "",
+    val idCategorie: String = "",
+    val idLieu: String = "",
+    val idLieuxMystere: String = "",
+    val imageUrl: String = "",
+    val nomLieu: String = ""
 )

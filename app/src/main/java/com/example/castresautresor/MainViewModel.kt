@@ -20,7 +20,7 @@ class MainViewModel : ViewModel(){
         .build();
     val api = retrofit.create(Api::class.java)
 
-    val lieuxmystere = MutableStateFlow<List<ApiLieuxMystere>>(listOf())
+    val lieuxmystere = MutableStateFlow<List<ApiLieux>>(listOf())
 
     fun getLieuxMystere(){
         viewModelScope.launch {
@@ -28,9 +28,9 @@ class MainViewModel : ViewModel(){
         }
     }
 
-    fun getLieuMystere(id:String){
+    fun getLieuMystere(idLieux:String){
         viewModelScope.launch {
-            //lieuxmystere.value= api.lieuxmystere().docs
+            lieuxmystere.value= api.lieuxmystere().docs
         }
     }
 }

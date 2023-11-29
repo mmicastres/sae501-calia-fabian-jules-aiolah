@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -23,21 +24,25 @@ import androidx.compose.ui.draw.BlurredEdgeTreatment
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 @Composable
-fun LieuMystere(lieuxMystere: ApiLieuxMystere) {
+fun LieuMystere(lieuxMystere: ApiLieux) {
     Row {
-        Text(text = lieuxMystere.idLieuxMystère)
+        Text(text = lieuxMystere.idLieuxMystere)
 
     }
 }
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LieuxMystere() {
     val viewModel = MainViewModel()
@@ -46,10 +51,12 @@ fun LieuxMystere() {
     LaunchedEffect(key1 = true) { viewModel.getLieuxMystere() }
 
     LazyVerticalGrid(columns = GridCells.Fixed(3)) {
+
         for (lieumystere in lieuMystere){
             val imageurl = "https://webmmi.iut-tlse3.fr/~clc4232a/S5/SAE501/" + lieumystere.imageUrl
             items(1){
                 Card(
+                    //onClick = {navController.navigate("lieu/${lieumystere.idLieu}")},
                     border = BorderStroke(1.dp, Color.LightGray),
                     colors = CardDefaults.cardColors(containerColor = Color.White),
                     modifier = Modifier
@@ -73,7 +80,10 @@ fun LieuxMystere() {
                                     edgeTreatment = BlurredEdgeTreatment(RoundedCornerShape(8.dp))
                                 )
                         )
-                        Text(text = lieumystere.description)
+                        Row(modifier = Modifier .height(75.dp)) {
+                            Text(text = lieumystere.descriptionMystere,)
+                        }
+
                 }
                 }
 
@@ -83,3 +93,21 @@ fun LieuxMystere() {
     }
 
 }
+/*
+@Composable
+fun LieuMystere(idLieux:String, viewModel:MainViewModel){
+    Text(text = idLieux)
+    val lieumystere by viewModel.lieuxmystere.collectAsStateWithLifecycle()
+    LaunchedEffect(key1 = true) { viewModel.getLieuMystere(idLieux) }
+
+
+    Text(
+        text = "text",
+        textAlign = TextAlign.Center,
+        fontWeight = FontWeight.Bold,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp)
+    )
+}
+*/
