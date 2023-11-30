@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                   Navigation()
+                    Navigation()
                 }
             }
         }
@@ -61,10 +61,9 @@ fun Navigation() {
             }
 
             composable(
-                "lieu/{id}"
+                "lieu/{idLieu}"
             ) { backStackEntry ->
-                LieuMystere(backStackEntry.arguments?.getString("id") ?: "", viewModel)
-                /* Film(backStackEntry.arguments?.getString("id")?:"") Est très utile pour les id | En gros tu cherches une id et si tu trouve pas tu fais :""*/
+                LieuMystere(backStackEntry.arguments?.getString("idLieu") ?: "", viewModel)
             }
         }
     }
