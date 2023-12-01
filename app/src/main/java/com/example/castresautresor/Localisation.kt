@@ -1,5 +1,55 @@
 package com.example.castresautresor
 
+import android.util.Log
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Button
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationResult
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+
+lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+var lon by mutableStateOf<Double?>(null)
+var lat by mutableStateOf<Double?>(null)
+
+var currentPos by mutableStateOf(Position(0.0, 0.0))
+
+val locationCallback = object : LocationCallback() {
+    override fun onLocationResult(locationResult: LocationResult) {
+        val lastLocation = locationResult.lastLocation
+        lon = lastLocation?.longitude
+        lat = lastLocation?.latitude
+        currentPos.latitude = lat!!
+        currentPos.longitude = lon!!
+
+    }
+}
+
+
+// Location management
+
+@Composable
+fun DisplayLocation() {
+
+    if(lat != null && lon != null) {
+        var newLoc = Position(lat!!, lon!!)
+        Log.e("position",newLoc.toString())
+
+    }
+}
+
+@Composable
+fun DisplayThermo(point : Position, point2 : Position){
+        val distance_point = point.getDistance(point2).toInt()
+}
+
+
+/*
+
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
@@ -10,8 +60,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SmallFloatingActionButton
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+
 import androidx.compose.ui.Modifier
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
@@ -20,7 +69,7 @@ import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
 
-/*
+
 @Composable
 fun map() {
     val singapore = LatLng(1.35, 103.87)
