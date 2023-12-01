@@ -11,20 +11,27 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationResult
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import org.osmdroid.util.GeoPoint
 
 lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 var lon by mutableStateOf<Double?>(null)
 var lat by mutableStateOf<Double?>(null)
 
 var currentPos by mutableStateOf(Position(0.0, 0.0))
+var currentGeoPoint by mutableStateOf(GeoPoint(0.0,0.0))
 
 val locationCallback = object : LocationCallback() {
     override fun onLocationResult(locationResult: LocationResult) {
         val lastLocation = locationResult.lastLocation
         lon = lastLocation?.longitude
         lat = lastLocation?.latitude
+
+        if(lat != null){
         currentPos.latitude = lat!!
         currentPos.longitude = lon!!
+
+        currentGeoPoint.latitude = lat!!
+        currentGeoPoint.longitude = lon!!}
 
     }
 }

@@ -27,13 +27,13 @@ import androidx.compose.ui.zIndex
 
 
 @Composable
-fun Thermometre(point: Position, point2: Position, magicalButton: Unit) {
+fun Thermometre(point: Position, point2: Position) {
 
-    val distance_point = point.getDistance(point2).toInt()
+    val distance_point = 99
 
     val color = getColor(distance_point)
     val pos2 = Position(43.6209, 2.2612)
-    magicalButton
+
 
 
     val configuration = LocalConfiguration.current

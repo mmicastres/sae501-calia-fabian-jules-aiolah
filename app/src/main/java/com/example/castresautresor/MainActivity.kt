@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,21 +18,32 @@ import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.location.*
+import org.osmdroid.views.MapView
 import kotlinx.coroutines.launch
+import org.osmdroid.config.Configuration
+import org.osmdroid.util.GeoPoint
 
 class MainActivity : ComponentActivity() {
 
 
-
+    lateinit var permissionContract: ActivityResultLauncher<Array<String>>
+    lateinit var homeScreenMapView: MapView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+        Configuration.getInstance().userAgentValue = packageName
+        homeScreenMapView = MapView(baseContext)
 
+        homeScreenMapView.controller.setCenter(currentGeoPoint)
         setContent {
 
            // Create the reference point from which we calculate distance
             val pos2 = Position(43.6209, 2.2612)
+            Log.e("lat" , currentGeoPoint.latitude.toString())
+            FinalLearningApp(
 
+                mapView = homeScreenMapView,
+                )
            val angle = currentPos.getAngle(pos2)
            Log.e("distance", angle.toString())
             Column(
@@ -43,11 +55,11 @@ class MainActivity : ComponentActivity() {
             ) {
 
                 if (currentPos.getDistance(pos2).toInt() > 99) {
-                    Button(onClick = { toggleLocationUpdates() }) {
+                    Button(onClick = { toggleLocationUpdates(); homeScreenMapView.controller.setCenter(currentGeoPoint) }) {
                         Text(text = if (lon != null && lat != null) "Stop Location Updates" else "Start Location Updates")
                     }
                 }else{
-                    Thermometre(point = currentPos, point2 = pos2, magicalButton())
+                    Thermometre(point = currentPos, point2 = pos2)
                 }
                 Log.e("Position 1", currentPos.toString())
                 Log.e("Calcul", currentPos.getDistance(pos2).toInt().toString())
@@ -87,7 +99,6 @@ class MainActivity : ComponentActivity() {
                 setGranularity(Granularity.GRANULARITY_PERMISSION_LEVEL)
                 setWaitForAccurateLocation(true)
             }.build()
-
             try {
                 fusedLocationProviderClient.requestLocationUpdates(
                     locationRequest,
