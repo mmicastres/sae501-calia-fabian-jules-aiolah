@@ -38,12 +38,9 @@ class MainActivity : ComponentActivity() {
         setContent {
 
            // Create the reference point from which we calculate distance
-            val pos2 = Position(43.6209, 2.2612)
+            val pos2 = Position(43.6213, 2.2606)
             Log.e("lat" , currentGeoPoint.latitude.toString())
-            FinalLearningApp(
 
-                mapView = homeScreenMapView,
-                )
            val angle = currentPos.getAngle(pos2)
            Log.e("distance", angle.toString())
             Column(
@@ -55,9 +52,15 @@ class MainActivity : ComponentActivity() {
             ) {
 
                 if (currentPos.getDistance(pos2).toInt() > 99) {
-                    Button(onClick = { toggleLocationUpdates(); homeScreenMapView.controller.setCenter(currentGeoPoint) }) {
-                        Text(text = if (lon != null && lat != null) "Stop Location Updates" else "Start Location Updates")
-                    }
+                    homeScreenMapView.controller.setCenter(currentGeoPoint)
+
+
+                    startLocationUpdates()
+                    FinalLearningApp(
+
+                            mapView = homeScreenMapView,
+                        )
+
                 }else{
                     Thermometre(point = currentPos, point2 = pos2)
                 }
@@ -79,7 +82,7 @@ class MainActivity : ComponentActivity() {
     private fun toggleLocationUpdates() {
         lifecycleScope.launch {
             if (lon != null && lat != null) {
-                stopLocationUpdates()
+
             } else {
                 // Vérifiez d'abord l'autorisation
                 if (checkLocationPermission()) {

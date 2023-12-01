@@ -187,7 +187,7 @@ private fun MapView(places:List<Place>, mapView:MapView, onAddNewMarker:(String)
         )
 
         mapView.apply {
-            controller.zoomTo(6, 1000L)
+            controller.zoomTo(18, 1000L)
 
             overlays.add(mapEventsOverlay)
 

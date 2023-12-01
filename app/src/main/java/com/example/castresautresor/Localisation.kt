@@ -33,6 +33,7 @@ val locationCallback = object : LocationCallback() {
         currentGeoPoint.latitude = lat!!
         currentGeoPoint.longitude = lon!!}
 
+
     }
 }
 
