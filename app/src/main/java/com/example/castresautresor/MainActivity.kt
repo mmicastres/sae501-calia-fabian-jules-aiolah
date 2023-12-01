@@ -21,7 +21,6 @@ import com.google.android.gms.location.*
 import org.osmdroid.views.MapView
 import kotlinx.coroutines.launch
 import org.osmdroid.config.Configuration
-import org.osmdroid.util.GeoPoint
 
 class MainActivity : ComponentActivity() {
 
@@ -38,7 +37,7 @@ class MainActivity : ComponentActivity() {
         setContent {
 
            // Create the reference point from which we calculate distance
-            val pos2 = Position(43.6213, 2.2606)
+            val pos2 = Position(43.6223, 2.2589)
             Log.e("lat" , currentGeoPoint.latitude.toString())
 
            val angle = currentPos.getAngle(pos2)
@@ -54,12 +53,9 @@ class MainActivity : ComponentActivity() {
                 if (currentPos.getDistance(pos2).toInt() > 99) {
                     homeScreenMapView.controller.setCenter(currentGeoPoint)
 
-
                     startLocationUpdates()
-                    FinalLearningApp(
 
-                            mapView = homeScreenMapView,
-                        )
+                    Compass(point = currentPos, point2 = pos2)
 
                 }else{
                     Thermometre(point = currentPos, point2 = pos2)

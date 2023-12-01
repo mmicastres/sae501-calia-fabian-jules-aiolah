@@ -17,7 +17,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
-
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -50,30 +49,7 @@ fun FinalLearningApp( mapView:MapView ){
 
     val context = LocalContext.current
     val places = mutableListOf<Place>(
-        Place(
-            id = "Singapoore1.349175",
-            "Singapoore",
-            GeoPoint( 1.349175, 103.840462 ),
-            description = "Singapore, officially the Republic of Singapore, is a sovereigb island country",
-            imageResId = R.drawable.michel,
-            focusZoomLvl = 11.0
-        ),
-        Place(
-            id = "India23.9031591",
-            "India",
-            GeoPoint( 23.9031591, 77.6705198 ),
-            description = "India, Well know as Bharat the country of Bhagwan Rama",
-            imageResId = R.drawable.michel,
-            focusZoomLvl = 6.0
-        ),
-        Place(
-            id= "London515075517",
-            "London",
-            GeoPoint( 51.5075517, -0.1276896 ),
-            description = "London, people's dream place to visit at least once in a lifetime",
-            imageResId = R.drawable.michel,
-            focusZoomLvl = 8.0
-        ),
+
     )
 
     val markersIdOnMap = remember{ mutableStateListOf<String>() }

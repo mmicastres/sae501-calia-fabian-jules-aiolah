@@ -34,8 +34,17 @@ class Position(latitude : Double, longitude : Double){
         Log.e("adjacant", adjacant.toString())
         val division = adjacant/hypo
         val result = Math.acos(division)*(180/Math.PI)
-        if(latitude>position.latitude){return 180-result}
-        else return result
+        return if(latitude>position.latitude){
+
+            if (longitude>position.longitude){
+               -(90+result)
+            } else 90+result
+        } else {
+            if (longitude > position.longitude) {
+                result - 90
+            } else -result +90
+        }
+
     }
 
 
