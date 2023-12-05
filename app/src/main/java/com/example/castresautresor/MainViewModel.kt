@@ -18,7 +18,8 @@ class MainViewModel: ViewModel() {
         .addInterceptor(BasicAuthInterceptor("aiolah", "6c6p8q20"))
         .build()
     val retrofit = Retrofit.Builder()
-        .baseUrl("https://api-nodejs-sae.onrender.com/")
+        //.baseUrl("https://api-nodejs-sae.onrender.com/")
+        .baseUrl("https://aiolah.alwaysdata.net/")
         .client(client)
         .addConverterFactory(MoshiConverterFactory.create())
         .build();

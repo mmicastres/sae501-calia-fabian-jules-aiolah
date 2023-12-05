@@ -48,6 +48,7 @@ fun Categorie(categorie: Categorie) {
         }
     }
 }
+
 @Composable
 fun Categories() {
     val viewModel = MainViewModel()
