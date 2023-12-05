@@ -1,7 +1,9 @@
 package com.example.castresautresor
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -22,6 +24,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.BlurredEdgeTreatment
 import androidx.compose.ui.draw.blur
@@ -30,6 +33,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
@@ -90,7 +94,6 @@ fun LieuxMystere(navController: NavHostController) {
 
 @Composable
 fun LieuMystere(idLieu:String, viewModel:MainViewModel){
-    Text(text = idLieu)
     val lieumystere by viewModel.lieumystere.collectAsStateWithLifecycle()
     val imageurl = "https://webmmi.iut-tlse3.fr/~clc4232a/S5/SAE501/" + lieumystere.imageUrl
 
@@ -98,15 +101,19 @@ fun LieuMystere(idLieu:String, viewModel:MainViewModel){
 
     Column(modifier = Modifier
         .fillMaxSize()
-        .padding(2.dp)) {
+        .padding(2.dp),
+        horizontalAlignment = Alignment.CenterHorizontally)
+        {
         Text(
-            text ="Lieu mystère n° "+ lieumystere.idLieu.toString(),
+            text ="Lieu mystère n°"+ lieumystere.idLieu,
             textAlign = TextAlign.Center,
             fontWeight = FontWeight.Bold,
+            fontSize = 25.sp,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp)
         )
+        Spacer(modifier = Modifier.height(20.dp))
         AsyncImage(
             model = imageurl,
             contentDescription = "Image du lieu mystère n° ${lieumystere.imageUrl}",
@@ -115,24 +122,31 @@ fun LieuMystere(idLieu:String, viewModel:MainViewModel){
                 .height(200.dp)
                 .clip(shape = RoundedCornerShape(10.dp))
                 .blur(
-                    radiusX = 20.dp,
-                    radiusY = 15.dp,
+                    radiusX = 30.dp,
+                    radiusY = 30.dp,
                     edgeTreatment = BlurredEdgeTreatment(RoundedCornerShape(8.dp))
                 )
         )
-        Text(text = "${lieumystere.descriptionMystere}")
-        @Composable
-        fun ButtonBousole(onClick: () -> Unit) {
-            Spacer(modifier = Modifier.height(60.dp))
-            Button(
-                onClick = onClick,
-                colors = ButtonDefaults.buttonColors(Color(0xFFEEBD0F))
-            ) {
-                Text("Commencer la recherche")
+            Spacer(modifier = Modifier.height(35.dp))
+            Card(modifier = Modifier
+                .width(300.dp),
+                shape = RoundedCornerShape(20)) {
+                Text(text = "${lieumystere.descriptionMystere}",
+                    modifier = Modifier
+                        .padding(horizontal = 20.dp, vertical = 5.dp),
+                    textAlign = TextAlign.Justify)
             }
-        }
+            ButtonBousole()
     }
+}
 
-
-
+@Composable
+fun ButtonBousole() {
+    Spacer(modifier = Modifier.height(40.dp))
+    Button(
+        onClick = { /*TO DO*/ },
+        colors = ButtonDefaults.buttonColors(Color(0xFFEEBD0F))
+    ) {
+        Text("Commencer la recherche", fontSize = 17.sp)
+    }
 }
