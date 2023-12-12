@@ -12,6 +12,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -24,7 +27,7 @@ import org.osmdroid.config.Configuration
 
 class MainActivity : ComponentActivity() {
 
-
+    var displayCompass by  mutableStateOf(false)
     lateinit var permissionContract: ActivityResultLauncher<Array<String>>
     lateinit var homeScreenMapView: MapView
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +40,7 @@ class MainActivity : ComponentActivity() {
         setContent {
 
            // Create the reference point from which we calculate distance
-            val pos2 = Position(43.6223, 2.2589)
+            val pos2 = Position(43.6219, 2.2663)
             Log.e("lat" , currentGeoPoint.latitude.toString())
 
            val angle = currentPos.getAngle(pos2)
@@ -49,29 +52,33 @@ class MainActivity : ComponentActivity() {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                FinalLearningApp(homeScreenMapView)
-                if (currentPos.getDistance(pos2).toInt() > 99) {
-                    homeScreenMapView.controller.setCenter(currentGeoPoint)
 
-                    startLocationUpdates()
 
-                    Compass(point = currentPos, point2 = pos2)
 
-                }else{
-                    Thermometre(point = currentPos, point2 = pos2)
-                }
-                Log.e("Position 1", currentPos.toString())
-                Log.e("Calcul", currentPos.getDistance(pos2).toInt().toString())
 
-                if (lon != null && lat != null) {
-                    DisplayLocation()
-                }
+                    if (currentPos.getDistance(pos2).toInt() > 99) {
+                        homeScreenMapView.controller.setCenter(currentGeoPoint)
+
+                        startLocationUpdates()
+
+                        Compass(point = currentPos, point2 = pos2)
+
+                    } else {
+                        Thermometre(point = currentPos, point2 = pos2)
+                    }
+                    Log.e("Position 1", currentPos.toString())
+                    Log.e("Calcul", currentPos.getDistance(pos2).toInt().toString())
+
+                    if (lon != null && lat != null) {
+                        DisplayLocation()
+                    }
+
             }
         }
     }
     @Composable
-    fun magicalButton(){
-        Button(onClick = { toggleLocationUpdates() }) {
+    fun magicalButton(onClick: () -> Unit) {
+        Button(onClick = { onClick() }) {
             Text(text = if (lon != null && lat != null) "Stop Location Updates" else "Start Location Updates")
         }}
 

@@ -83,7 +83,7 @@ fun Thermometre(point: Position, point2: Position) {
                             )
                             translate(top = height.toFloat() / 4) {
                                 scale(scaleX = width / 89, scaleY = height.toFloat() / 170) {
-                                    drawCircle(color, radius = 25f)
+                                    drawCircle(color, radius = 26f)
                                 }
                             }
                         }
