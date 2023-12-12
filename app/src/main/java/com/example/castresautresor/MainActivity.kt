@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-
+                FinalLearningApp(homeScreenMapView)
                 if (currentPos.getDistance(pos2).toInt() > 99) {
                     homeScreenMapView.controller.setCenter(currentGeoPoint)
 
