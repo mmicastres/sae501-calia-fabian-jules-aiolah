@@ -14,12 +14,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.castresautresor.ui.theme.CastresAuTresorTheme
 import com.example.premiereapplication.MainViewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,17 +33,34 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Categories()
+                    Navigation()
                 }
             }
         }
     }
 }
 
+sealed class Destination(val destination: String, val label: String)
+{
+    object Categories: Destination("categories", "Catégories")
+    object Categorie: Destination("categorie/{id}", "Catégorie")
+}
+
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "CASTRES AU TRÉSOR :) !",
-        modifier = modifier
-    )
+fun Navigation() {
+    val navController = rememberNavController();
+    val navBackStackEntry by navController.currentBackStackEntryAsState();
+
+    var currentDestination = navBackStackEntry?.destination?.route;
+
+    NavHost(navController, startDestination = Destination.Categories.destination) {
+        composable(Destination.Categories.destination) { Categories(navController) }
+        composable(
+            Destination.Categorie.destination,
+            arguments = listOf(navArgument("id") { type = NavType.StringType })
+        ) {
+            var id = navBackStackEntry?.arguments?.getString("id")
+            InsideCategorie(id, navController)
+        }
+    }
 }
