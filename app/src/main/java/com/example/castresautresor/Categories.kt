@@ -1,5 +1,6 @@
 package com.example.castresautresor
 
+import MainViewModel
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -34,7 +35,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
-import com.example.premiereapplication.MainViewModel
 
 @Composable
 fun Categories(navController: NavHostController) {

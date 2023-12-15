@@ -1,5 +1,6 @@
 package com.example.castresautresor
 
+import MainViewModel
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize

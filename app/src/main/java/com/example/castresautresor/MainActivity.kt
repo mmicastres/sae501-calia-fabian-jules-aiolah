@@ -1,5 +1,6 @@
 package com.example.castresautresor
 
+import MainViewModel
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -27,7 +28,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.castresautresor.ui.theme.CastresAuTresorTheme
-import com.example.premiereapplication.MainViewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
@@ -63,7 +63,7 @@ fun Navigation() {
 
     Scaffold { innerPadding ->
         NavHost(
-            navController, startDestination = Destination.Categorie.destination,
+            navController, startDestination = Destination.Categories.destination,
             Modifier.padding(innerPadding)
         ) {
             // Composant Categories
@@ -84,7 +84,7 @@ fun Navigation() {
 
             // Composant LieuxMystereFromCategorie
             composable(
-                "lieux/{idCategorie}"
+                "categorie/{idCategorie}"
             ) { backStackEntry ->
                 LieuxMystereFromCategorie(navController,backStackEntry.arguments?.getString("idCategorie") ?: "", viewModel)
             }
@@ -101,8 +101,8 @@ fun Navigation() {
 
 sealed class Destination(val destination: String, val label: String) {
     object Categories: Destination("categories", "Catégories")
-    object Categorie: Destination("categorie/{id}", "Catégorie")
+    // object Categorie: Destination("categorie/{id}", "Catégorie")
     object LieuxMystere : Destination("lieux", "LieuxMystere")
     object LieuMystere : Destination("lieu", "LieuMystere")
-    object Categorie : Destination("lieux/{idCategorie}")
+    object Categorie : Destination("categorie/{idCategorie}", "Lieux d'une catégorie")
 }
