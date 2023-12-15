@@ -1,4 +1,4 @@
-package com.example.castresautresor
+package com.example.formsutil
 
 import org.junit.Test
 

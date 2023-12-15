@@ -1,4 +1,4 @@
-package com.example.castresautresor.ui.theme
+package com.example.formsutil.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
