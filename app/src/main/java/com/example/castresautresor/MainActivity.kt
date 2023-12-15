@@ -53,7 +53,7 @@ fun Navigation() {
 
     Scaffold { innerPadding ->
         NavHost(
-            navController, startDestination = Destination.LieuxMystere.destination,
+            navController, startDestination = Destination.Categorie.destination,
             Modifier.padding(innerPadding)
         ) {
             composable(Destination.LieuxMystere.destination) {
@@ -65,6 +65,11 @@ fun Navigation() {
             ) { backStackEntry ->
                 LieuMystere(backStackEntry.arguments?.getString("idLieu") ?: "", viewModel)
             }
+            composable(
+                "lieux/{idCategorie}"
+            ) { backStackEntry ->
+                LieuxMystereFromCategorie(navController,backStackEntry.arguments?.getString("idCategorie") ?: "", viewModel)
+            }
         }
     }
 
@@ -72,4 +77,6 @@ fun Navigation() {
 sealed class Destination(val destination: String, val label: String, val icon: ImageVector) {
     object LieuxMystere : Destination("lieux", "LieuxMystere", Icons.Filled.AccountBox)
     object LieuMystere : Destination("lieu", "LieuMystere", Icons.Filled.Home)
+    object Categorie : Destination("lieux/{idCategorie}", "LieuxMystere", Icons.Filled.Home)
+
 }

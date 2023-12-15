@@ -11,17 +11,18 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 class MainViewModel : ViewModel(){
     var client = OkHttpClient.Builder()
-        .addInterceptor(BasicAuthInterceptor("aiolah_calia", "Fire_horse84"))
-        .build()
+            .addInterceptor(BasicAuthInterceptor("aiolah_calia", "Fire_horse84"))
+            .build()
     val retrofit = Retrofit.Builder()
-        .baseUrl("https://api-nodejs-sae.onrender.com/")
-        .client(client)
-        .addConverterFactory(MoshiConverterFactory.create())
-        .build();
+            .baseUrl("https://api-nodejs-sae.onrender.com/")
+            .client(client)
+            .addConverterFactory(MoshiConverterFactory.create())
+            .build();
     val api = retrofit.create(Api::class.java)
 
     val lieuxmystere = MutableStateFlow<List<ApiLieux>>(listOf())
     val lieumystere = MutableStateFlow(ApiLieux())
+    val categorie = MutableStateFlow<List<ApiLieux>>(listOf())
     //Penser a ajouter
 
 
@@ -34,6 +35,12 @@ class MainViewModel : ViewModel(){
     fun getLieuMystere(idLieu:String){
         viewModelScope.launch {
             lieumystere.value= api.lieumystere(idLieu)
+        }
+    }
+
+    fun fromCategorie(idCategorie:String){
+        viewModelScope.launch {
+            categorie.value = api.categorie(idCategorie).docs
         }
     }
 }
