@@ -3,9 +3,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.castresautresor.Api
 import com.example.castresautresor.Categorie
-//package com.example.castresautresor
+package com.example.castresautresor
 import androidx.compose.runtime.Composable
-import com.example.castresautresor.ApiLieux
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
@@ -29,7 +28,6 @@ class MainViewModel: ViewModel() {
         viewModelScope.launch {
             categories.value = api.categories().docs
         }
-    }
         
     fun getLieuxMystere(){
         viewModelScope.launch {

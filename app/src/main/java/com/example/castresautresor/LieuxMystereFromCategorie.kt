@@ -1,6 +1,5 @@
 package com.example.castresautresor
 
-import MainViewModel
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -12,6 +11,7 @@ import androidx.navigation.NavHostController
 
 @Composable
 fun LieuxMystereFromCategorie(navController: NavHostController, idCategorie:String, viewModel: MainViewModel) {
+    val viewModel = MainViewModel()
     //Appel de viewModel.getLieuxMystere() une seule fois => Première apparition du composant LieuxMystere
     val lieuFromCategorie by viewModel.categorie.collectAsStateWithLifecycle()
 
