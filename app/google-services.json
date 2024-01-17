@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "736642013837",
+    "project_id": "authcat-78c40",
+    "storage_bucket": "authcat-78c40.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:736642013837:android:f6541271c22dea665720c4",
+        "android_client_info": {
+          "package_name": "com.example.appliorganisee"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1gVaokqg8i18qusFZc56A-WWf8dFtXeg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:736642013837:android:f8a1ea3458c6ed865720c4",
+        "android_client_info": {
+          "package_name": "com.example.castresautresor"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1gVaokqg8i18qusFZc56A-WWf8dFtXeg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:736642013837:android:6854378ff5ea69d35720c4",
+        "android_client_info": {
+          "package_name": "com.example.formsutil"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1gVaokqg8i18qusFZc56A-WWf8dFtXeg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
