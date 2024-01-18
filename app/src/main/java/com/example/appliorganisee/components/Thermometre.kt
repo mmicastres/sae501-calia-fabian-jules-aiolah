@@ -1,15 +1,27 @@
 package com.example.appliorganisee.components
 
+import android.util.Log
 import com.example.appliorganisee.R
 import com.example.appliorganisee.Utlis.Position
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+
+
 import androidx.compose.foundation.layout.Column
+
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.IconButton
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
@@ -23,7 +35,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.zIndex
-import org.osmdroid.views.MapView
 
 
 @Composable
@@ -33,7 +44,7 @@ fun Thermometre(point: Position, point2: Position) {
 
     val color = getColor(distance_point)
 
-
+    var QrcodeVisible by remember { mutableStateOf(false) }
 
     val configuration = LocalConfiguration.current
     val density = LocalDensity.current
@@ -41,7 +52,12 @@ fun Thermometre(point: Position, point2: Position) {
 
     //val widthH = configuration.screenWidthDp.toFloat() * modificator
     val heightmodificator = modificator / 1.3
+    if (QrcodeVisible) {
+        ShowQRCode()
+    }
 
+    BottomRightIconButton(){ QrcodeVisible = !QrcodeVisible
+    }
     if (distance_point in 0..99) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -108,5 +124,28 @@ fun getColor(distancePoint: Int): Color {
             Color(blueValue, blueValue, 255) // Transition progressive vers le bleu
         }
         else -> throw IllegalArgumentException("La distance doit être entre 0 et 99.")
+    }
+}
+
+@Composable
+fun BottomRightIconButton(onClick: () -> Unit) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp, 0.dp, 0.dp, 100.dp),
+        contentAlignment = Alignment.BottomEnd
+    ) {
+        IconButton(
+            onClick =  onClick,
+            modifier = Modifier
+                .size(60.dp)
+                .padding(bottom = 7.dp)
+                .fillMaxSize()
+        ) {
+            androidx.compose.material3.Icon(
+                painter = painterResource(R.drawable.icone_qrcode),
+                contentDescription = "Icône"
+            )
+        }
     }
 }

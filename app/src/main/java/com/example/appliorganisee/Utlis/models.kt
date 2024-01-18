@@ -1,6 +1,12 @@
 package com.example.appliorganisee.Utlis
 
+import android.util.Log
+import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
+import java.lang.reflect.Constructor
+import com.google.firebase.auth.FirebaseUser
+import kotlinx.coroutines.launch
 
 // Classe des catégories
 data class Categories(
@@ -32,4 +38,23 @@ data class ApiLieux(
     val lat: String = "",
     val long: String = "",
     val nomLieu: String = ""
+)
+
+// Classes concernant les utilisateurs
+
+data class Util(
+    val idUtil: String = "",
+    val email: String = ""){
+    val LieuxDecouvert : List<LieuxDecouvert> = listOf()
+
+    companion object {
+        fun fromFirebase(utilisateur: FirebaseUser) =
+            Util(utilisateur.uid, utilisateur.email ?: "")
+    }
+}
+
+
+data class LieuxDecouvert(
+    val idLieu: String = "",
+    val date: String = "",
 )

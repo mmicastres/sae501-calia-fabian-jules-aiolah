@@ -1,5 +1,6 @@
 package com.example.appliorganisee
 
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -10,8 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -37,12 +36,10 @@ import com.example.appliorganisee.components.Profil
 import com.example.appliorganisee.components.Collection
 import com.example.appliorganisee.components.Compass
 import com.example.appliorganisee.components.Thermometre
-//import com.example.appliorganisee.components.LieuxNonDecouverts
 import com.example.appliorganisee.ui.theme.AppliOrganiseeTheme
 import com.example.appliorganisee.ui.theme.Vert
 import com.example.castresautresor.DetailLieuMystere
 import com.example.castresautresor.LieuxMystere
-//import com.example.castresautresor.LieuxMystere
 import com.example.castresautresor.LieuxMystereFromCategorie
 import com.google.android.gms.location.LocationServices
 import org.osmdroid.config.Configuration
@@ -106,7 +103,8 @@ class MainActivity : ComponentActivity() {
                 val currentDestination = navBackStackEntry?.destination?.route
 
                 Scaffold(
-                    bottomBar = { BottomNavigation(backgroundColor = Vert) {
+                    bottomBar =
+                    { BottomNavigation(backgroundColor = Vert) {
                         destinations.forEach { screen ->
                             BottomNavigationItem(
                                 icon = {
@@ -122,16 +120,22 @@ class MainActivity : ComponentActivity() {
                     }){ innerPadding ->
                     NavHost(navController = navController, startDestination = "Accueil") {
                         Modifier.padding(innerPadding)
+
+
+                        // Attribution des données de l'utilisateur
+                        var currentUser = auth.currentUser
+
                         composable("Accueil"){ Accueil(homeScreenMapView)}
 
                         composable("Profil") {
 
-                            // Vérification si l'utilisateur est connecté, si connecté renvoie son email sinon les formulaires.
-
-                            var currentUser = auth.currentUser
                             if (deconnecte.value == false) {
                                 Column() {
+
                                     if (currentUser != null) {
+                                        auth.currentUser?.let {
+                                            catViewModel.postUtil(it)
+                                        }
                                         Text(text = currentUser!!.email.toString())
                                         Button(onClick = {
                                             deconnecte.value = true; currentUser = null;
@@ -168,7 +172,7 @@ class MainActivity : ComponentActivity() {
                         ) { backStackEntry ->
                             DetailLieuMystere(
                                 backStackEntry.arguments?.getString("idLieu") ?: "",
-                                catViewModel, navController
+                                catViewModel, navController,currentUser
                             )
                         }
 
@@ -266,6 +270,7 @@ class MainActivity : ComponentActivity() {
         )
     }
     val locationCallback = object : LocationCallback() {
+        @SuppressLint("SuspiciousIndentation")
         override fun onLocationResult(locationResult: LocationResult) {
             val lastLocation = locationResult.lastLocation
          lon = lastLocation?.longitude

@@ -29,23 +29,17 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.appliorganisee.CatViewModel
+import com.google.firebase.auth.FirebaseUser
 
-@Composable
-fun ButtonBousole() {
-    Spacer(modifier = Modifier.height(40.dp))
-    Button(
-        onClick = {
-            val lat = "2.02"
-        },
-        colors = ButtonDefaults.buttonColors(Color(0xFFEEBD0F))
-    ) {
-        Text("Commencer la recherche", fontSize = 17.sp)
-    }
-}
 
 // Détails d'un lieu mystère
 @Composable
-fun DetailLieuMystere(idLieu:String, viewModel: CatViewModel, navController:NavController){
+fun DetailLieuMystere(
+    idLieu: String,
+    viewModel: CatViewModel,
+    navController: NavController,
+    currentUser: FirebaseUser?
+){
     val lieumystere by viewModel.lieumystere.collectAsStateWithLifecycle()
     val imageurl = "https://webmmi.iut-tlse3.fr/~clc4232a/S5/SAE501/" + lieumystere.imageUrl
 
@@ -89,7 +83,6 @@ fun DetailLieuMystere(idLieu:String, viewModel: CatViewModel, navController:NavC
                     .padding(horizontal = 20.dp, vertical = 5.dp),
                 textAlign = TextAlign.Justify)
         }
-        //ButtonBousole()
 
         Button(
             onClick = {
@@ -100,5 +93,16 @@ fun DetailLieuMystere(idLieu:String, viewModel: CatViewModel, navController:NavC
         ) {
             Text("Commencer la recherche", fontSize = 17.sp)
         }
+
+
+        Button(onClick = {
+            if (currentUser != null) {
+                viewModel.putUtil(currentUser)
+            }
+
+        }) {
+            Text(text = "C'est de l'art ça je reconnais")
+        }
+
     }
 }
