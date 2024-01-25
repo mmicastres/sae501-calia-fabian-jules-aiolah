@@ -30,6 +30,7 @@ class CatViewModel: ViewModel() {
     val categorie = MutableStateFlow<List<ApiLieux>>(listOf())
     val utilisateur = MutableStateFlow(Util())
     val lieuxutilisateur = MutableStateFlow<List<LieuxDecouvert>>(listOf())
+    val lieudecouvert =  MutableStateFlow(ApiLieux())
 
     // Se lance à la création de la classe MainActivity
 
@@ -54,6 +55,14 @@ class CatViewModel: ViewModel() {
     fun fromCategorie(idCategorie:String){
         viewModelScope.launch {
             categorie.value = api.categorie(idCategorie).docs
+        }
+    }
+
+    // Récupération des infos du lieu scanné
+
+    fun getLieuDecouvert(idLieu: String){
+        viewModelScope.launch {
+            lieudecouvert.value= api.lieudecouvert(idLieu)
         }
     }
 

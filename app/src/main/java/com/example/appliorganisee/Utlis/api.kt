@@ -20,6 +20,9 @@ interface Api {
     @GET("lieux/{idCategorie}")
     suspend fun categorie(@Path("idCategorie") idCategorie:String) : ApiLieuxResult
 
+    @GET("lieudecouvert/{idLieu}")
+    suspend fun lieudecouvert(@Path("idLieu") idLieu:String) : ApiLieux
+
     @GET("utilisateurslieux/{idUtil}")
     suspend fun getUtilLieux(@Path("idUtil")idUtil: String) : List<LieuxDecouvert>
 

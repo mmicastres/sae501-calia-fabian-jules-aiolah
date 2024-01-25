@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -101,6 +103,9 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentDestination = navBackStackEntry?.destination?.route
+
+                // A REMPLACER AVEC IDLIEU
+                val TEMPORAIRE = 1
 
                 Scaffold(
                     bottomBar =
@@ -194,6 +199,10 @@ class MainActivity : ComponentActivity() {
                             }
                         }
 
+                        composable(Destination.LieuDecouvert.destination) {
+                            // A REMPLACER AVEC L'ID LIEU OBTENU AVEC LE SCAN DU QR CODE
+                            LieuDecouvert(TEMPORAIRE.toString(),  catViewModel)
+                        }
 
                         composable("Collection") { Collection() }
                     }
@@ -214,6 +223,7 @@ class MainActivity : ComponentActivity() {
         object LieuxMystere : Destination("lieux", "LieuxMystere", R.drawable.icone_collection)
         object DetailLieuMystere : Destination("lieu/{idLieu}", "LieuMystere", R.drawable.icone_collection)
         object Jeu  : Destination("jeu/{lat}&{lon}", "Jeu", R.drawable.icone_collection)
+        object LieuDecouvert : Destination("lieudecouvert/{idLieu}", "LieuxDecouvert", R.drawable.icone_collection)
     }
     val destinations = listOf(Destination.Profil, Destination.Categories, Destination.Collection)
 
