@@ -10,6 +10,10 @@ Cette application possède un système de récompenses au fur et à mesure que l
 
 Il sera nécessaire de se créer un compte à l'aide d'une adresse mail et d'un mot de passe pour accéder à l'application. Cela est nécessaire car l'utilisateur recevra les certificats par mail de manière à pouvoir les imprimer.
 
+## ETUDE ET ANALYSE DU BESOIN
+
+- [Dossier](https://drive.google.com/file/d/1BE6ElyoEzDoLX1qG9Wxyk7S6qlv9tJjd/view?usp=sharing)
+
 ## LIVRABLES UX
 
 - [Maquette interactive](https://www.figma.com/proto/eb2jVZ2wBG65SzdeitfkCj/Maquettes?page-id=112%3A1263&type=design&node-id=126-887&viewport=307%2C396%2C0.23&t=aC1iHGlWLdDdAqOH-1&scaling=scale-down&starting-point-node-id=126%3A887&mode=design)
