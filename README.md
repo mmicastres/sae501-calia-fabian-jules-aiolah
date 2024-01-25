@@ -20,7 +20,7 @@ Il sera nécessaire de se créer un compte à l'aide d'une adresse mail et d'un 
 - [Diagramme bêtes à cornes](https://drive.google.com/file/d/17680dEitnraFn44eEiCdIYYVlT9hDzV9/view?usp=sharing)
 - [Liste des exigences (MoSCoW)](https://drive.google.com/file/d/1aBR2aIVle5xREsTTs_tqX8pkloJbfmX3/view?usp=sharing)
 - [Diagramme des Use Case](https://drive.google.com/file/d/1DkBzDU89QWn4l19wKV0GEn4hEDR8-cK0/view?usp=sharing)
-- [Schéma d'architecture logicielle]()
+- [Schémas d'architecture logicielle](https://drive.google.com/file/d/1inSompsJSVajKH1Rq6da75etgYVx3M6S/view?usp=sharing)
 
 ## LIVRABLES GESTION DE PROJET
 
