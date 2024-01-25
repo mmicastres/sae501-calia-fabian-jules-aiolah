@@ -50,6 +50,22 @@ Il sera nécessaire de se créer un compte à l'aide d'une adresse mail et d'un 
 - [x] Partie “Collection” : *Jules & Fabian*
   - **[Application]** Après scan du QR code : affichage des détails d'un lieu et ajout du lieu découvert dans la bdd
 
+## DOCUMENTATION TECHNIQUE
+
+L'application mobile a été codée avec Kotlin et Jetpack Compose. Cela signifie qu'elle fonctionne uniquement sur les téléphones portables sous Android.
+L'application n'est pas disponible sur le Play Store Google. Ainsi, pour l'installer sur votre appareil, veuillez effectuer les étapes décrites ci-dessous :
+
+1. Installer [Android Studio](https://developer.android.com/studio) sur votre ordinateur
+2. Cloner le repository Github disponible [ici](https://github.com/mmicastres/sae501-calia-fabian-jules-aiolah) sur votre ordinateur
+3. Ouvrir le dossier cloné dans Android Studio
+4. Relier votre téléphone à votre ordinateur par un câble USB
+5. Activer le mode développeur sur votre téléphone
+6. Vérifier que votre téléphone est bien détecté par Android Studio et que vous avez suffisamment d'espace sur votre téléphone pour installer l'application
+7. Activer le wi-fi
+8. Lancer l'installation de l'application sur votre téléphone en appuyant sur le bouton Play vert d'Android Studio
+9. L'application se lance
+10. Félicitations, vous pouvez maintenant utiliser l'application en vous référant au mode d'emploi !
+
 ## ETUDE ET ANALYSE DU BESOIN
 
 - [Dossier](https://drive.google.com/file/d/1BE6ElyoEzDoLX1qG9Wxyk7S6qlv9tJjd/view?usp=sharing)
