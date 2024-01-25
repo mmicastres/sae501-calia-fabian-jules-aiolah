@@ -20,9 +20,12 @@ interface Api {
     @GET("lieux/{idCategorie}")
     suspend fun categorie(@Path("idCategorie") idCategorie:String) : ApiLieuxResult
 
-    @POST("posts")
+    @GET("utilisateurslieux/{idUtil}")
+    suspend fun getUtilLieux(@Path("idUtil")idUtil: String) : List<LieuxDecouvert>
+
+    @POST("utilisateurs")
     suspend fun createUser(@Body utilisateur: Util):Response<Util>
 
-    @PUT("put/{idUtil}")
+    @PUT("utilisateurs/{idUtil}")
     suspend fun updateUser(@Path("idUtil") idUtil: String, @Body utilisateur: Util):Response<Util>
 }

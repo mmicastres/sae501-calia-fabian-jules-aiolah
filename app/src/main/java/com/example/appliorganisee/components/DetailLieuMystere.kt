@@ -40,6 +40,9 @@ fun DetailLieuMystere(
     navController: NavController,
     currentUser: FirebaseUser?
 ){
+    if (currentUser != null) {
+        viewModel.getLieuxByUid(currentUser.uid)
+    }
     val lieumystere by viewModel.lieumystere.collectAsStateWithLifecycle()
     val imageurl = "https://webmmi.iut-tlse3.fr/~clc4232a/S5/SAE501/" + lieumystere.imageUrl
 

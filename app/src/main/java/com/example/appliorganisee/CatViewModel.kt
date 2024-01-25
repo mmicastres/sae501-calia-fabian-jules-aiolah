@@ -7,6 +7,7 @@ import com.example.appliorganisee.Utlis.Api
 import com.example.appliorganisee.Utlis.Categorie
 import kotlinx.coroutines.flow.MutableStateFlow
 import com.example.appliorganisee.Utlis.ApiLieux
+import com.example.appliorganisee.Utlis.LieuxDecouvert
 import com.example.appliorganisee.Utlis.Util
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.launch
@@ -28,6 +29,7 @@ class CatViewModel: ViewModel() {
     val lieumystere = MutableStateFlow(ApiLieux())
     val categorie = MutableStateFlow<List<ApiLieux>>(listOf())
     val utilisateur = MutableStateFlow(Util())
+    val lieuxutilisateur = MutableStateFlow<List<LieuxDecouvert>>(listOf())
 
     // Se lance à la création de la classe MainActivity
 
@@ -69,11 +71,26 @@ class CatViewModel: ViewModel() {
 
     // Modification dudit utilisateur
 
-    fun putUtil(user: FirebaseUser){
-        viewModelScope.launch{
+    fun putUtil(user: FirebaseUser, code: String = ""){
+        viewModelScope.launch {
+
             val myuser = Util.fromFirebase(user)
+            myuser.addLieux(lieuxutilisateur.value)
+            Log.e("Avant addLieux", myuser.toString())
+            var code2 = LieuxDecouvert.fromCode(code)
+            myuser.addLieux(listOf(code2))
+            Log.e("Après addLieux", myuser.toString())
             utilisateur.value = myuser
-            api.updateUser(myuser.idUtil,myuser)
+            api.updateUser(myuser.idUtil, myuser)
+        }
+    }
+
+    // Récupération des lieux découverts de l'utilisateur connecté
+
+    fun getLieuxByUid(useruid: String){
+        viewModelScope.launch {
+            lieuxutilisateur.value = api.getUtilLieux(useruid);
+            Log.e("lieuxutilisateur", lieuxutilisateur.value.toString())
         }
     }
 

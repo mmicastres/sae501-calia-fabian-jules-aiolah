@@ -1,6 +1,5 @@
 package com.example.appliorganisee.components
 
-import android.util.Log
 import com.example.appliorganisee.R
 import com.example.appliorganisee.Utlis.Position
 import androidx.compose.foundation.Canvas
@@ -13,10 +12,10 @@ import androidx.compose.foundation.layout.Column
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.IconButton
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -35,10 +34,17 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.zIndex
+import com.example.appliorganisee.CatViewModel
+import com.google.firebase.auth.FirebaseUser
 
 
 @Composable
-fun Thermometre(point: Position, point2: Position) {
+fun Thermometre(
+    point: Position,
+    point2: Position,
+    catViewModel: CatViewModel,
+    currentUser: FirebaseUser?
+) {
 
     val distance_point = point.getDistance(point2).toInt()
 
@@ -50,15 +56,21 @@ fun Thermometre(point: Position, point2: Position) {
     val density = LocalDensity.current
     val modificator = density.density * 0.490f
 
+
     //val widthH = configuration.screenWidthDp.toFloat() * modificator
     val heightmodificator = modificator / 1.3
     if (QrcodeVisible) {
-        ShowQRCode()
+        ShowQRCode(catViewModel, currentUser)
     }
-
+    else{
     BottomRightIconButton(){ QrcodeVisible = !QrcodeVisible
     }
-    if (distance_point in 0..99) {
+        if (distance_point in 0..49) {
+            drawFlames(distance_point)
+        } else if (distance_point in 50..99) {
+            drawFlakes(taille = distance_point)
+        }
+        if (distance_point in 0..99) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center,
@@ -104,7 +116,7 @@ fun Thermometre(point: Position, point2: Position) {
                         }
                     }
                 }
-            }
+            }}
 
         }
     }
@@ -147,5 +159,42 @@ fun BottomRightIconButton(onClick: () -> Unit) {
                 contentDescription = "Icône"
             )
         }
+    }
+}
+@Composable
+fun drawFlames(taille: Int) {
+    val flameCount = 70 // Nombre de flammes
+    val screenHeight = LocalConfiguration.current.screenHeightDp.dp
+
+    for (i in 0 until flameCount) {
+        val flameTop = (i * 40).dp // Ajustez la distance entre les flammes selon vos besoins
+        val randomOffset = (10..90).random() // Ajustez la plage selon vos besoins
+
+        Image(
+            painter = painterResource(id = R.drawable.flame),
+            contentDescription = "Flame",
+            modifier = Modifier
+                .size(((50 - taille) * 3).dp)
+                .offset(x = (randomOffset * 3).dp, y = flameTop + screenHeight * 0.2f)
+        )
+    }
+}
+
+@Composable
+fun drawFlakes(taille: Int) {
+    val flakeCount = 70
+    val screenHeight = LocalConfiguration.current.screenHeightDp.dp
+
+    for (i in 0 until flakeCount) {
+        val flakeTop = (i * 40).dp //
+        val randomOffset = (10..90).random() // Ajustez la plage selon vos besoins
+
+        Image(
+            painter = painterResource(id = R.drawable.flake),
+            contentDescription = "Flake",
+            modifier = Modifier
+                .size(((taille - 50) * 3).dp)
+                .offset(x = (randomOffset * 3).dp, y = flakeTop + screenHeight * 0.2f)
+        )
     }
 }

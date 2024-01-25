@@ -1,7 +1,6 @@
 package com.example.appliorganisee.components
 
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,13 +20,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import com.example.appliorganisee.CatViewModel
 import com.example.appliorganisee.Utlis.authentification
 import com.example.appliorganisee.Utlis.inscription
 import com.google.firebase.auth.FirebaseAuth
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Profil(auth: FirebaseAuth, deconnecte: MutableState<Boolean>) {
+fun Profil(auth: FirebaseAuth, deconnecte: MutableState<Boolean>, catViewModel: CatViewModel) {
 
    var email by remember { mutableStateOf("") }
    var password by remember { mutableStateOf("") }
@@ -46,14 +46,14 @@ fun Profil(auth: FirebaseAuth, deconnecte: MutableState<Boolean>) {
             Text("Login")
          }
          Text(text = "Pas de compte ?")
-         FormInscr(auth, deconnecte)
+         FormInscr(auth, deconnecte, catViewModel)
       }
    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FormInscr(auth: FirebaseAuth, deconnecte: MutableState<Boolean>) {
+fun FormInscr(auth: FirebaseAuth, deconnecte: MutableState<Boolean>, catViewModel: CatViewModel) {
 
    var email by remember { mutableStateOf("") }
    var password by remember { mutableStateOf("") }
@@ -65,7 +65,7 @@ fun FormInscr(auth: FirebaseAuth, deconnecte: MutableState<Boolean>) {
          TextField(value = password, onValueChange = {password = it}, label = { Text(text = "Mot de passe") },visualTransformation = PasswordVisualTransformation(), keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password))
          Button(
             onClick = {
-               inscription(email, password, auth, deconnecte)
+               inscription(email, password, auth, deconnecte, catViewModel)
             },
             modifier = Modifier.fillMaxWidth()
          ) {

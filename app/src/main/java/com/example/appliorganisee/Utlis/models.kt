@@ -44,17 +44,28 @@ data class ApiLieux(
 
 data class Util(
     val idUtil: String = "",
-    val email: String = ""){
-    val LieuxDecouvert : List<LieuxDecouvert> = listOf()
+    val email: String = "",
+    var LieuxDecouvert: List<LieuxDecouvert> = listOf(),
 
+) {
     companion object {
         fun fromFirebase(utilisateur: FirebaseUser) =
-            Util(utilisateur.uid, utilisateur.email ?: "")
+            Util(utilisateur.uid, utilisateur.email ?: "", listOf())
+    }
+    fun addLieux(codes: List<LieuxDecouvert>) {
+        LieuxDecouvert = LieuxDecouvert + codes
+        Log.e("nouveau tableau", LieuxDecouvert.toString())
     }
 }
 
 
+
 data class LieuxDecouvert(
     val idLieu: String = "",
-    val date: String = "",
-)
+
+) {
+    companion object {
+        fun fromCode(code: String) =
+            LieuxDecouvert(code)
+    }
+}

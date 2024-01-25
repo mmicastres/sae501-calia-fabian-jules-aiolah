@@ -5,8 +5,6 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.util.Log
 import android.util.Size
-import android.webkit.WebView
-import android.webkit.WebViewClient
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -36,13 +34,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import com.example.appliorganisee.CatViewModel
 import com.example.appliorganisee.QrCodeAnalyzer
 import com.example.appliorganisee.R
+import com.google.firebase.auth.FirebaseUser
 
 
 @Composable
-fun ShowQRCode (
-){
+fun ShowQRCode(catViewModel: CatViewModel, currentUser: FirebaseUser?) {
     var code by remember { mutableStateOf("") }
     var hasReadCode by remember { mutableStateOf(false) }
     val context = LocalContext.current
@@ -82,6 +81,7 @@ fun ShowQRCode (
 
                 }
             } else {
+
                 AndroidView(
                     factory = { context ->
                         val previewView = PreviewView(context)
@@ -102,9 +102,17 @@ fun ShowQRCode (
                         imageAnalysis.setAnalyzer(
                             ContextCompat.getMainExecutor(context),
                             QrCodeAnalyzer { result ->
-                                Log.e("code", code)
-                                code = result
-                                hasReadCode = true
+                                if(result.split("/")[0] == "castres au trésor"){
+                                    code = result.split("/")[1]
+                                    Log.e("code", code)
+                                    hasReadCode = true
+                                    if (currentUser != null) {
+
+
+                                        catViewModel.putUtil(currentUser, code)
+                                    }
+                                }
+                                Log.e("result", result)
                             }
                         )
                         try {

@@ -147,7 +147,7 @@ class MainActivity : ComponentActivity() {
                                     }
                                 }
                             }else{
-                                Profil(auth, deconnecte)
+                                Profil(auth, deconnecte, catViewModel)
                             }}
 
                         // --- Route des catégories
@@ -189,7 +189,7 @@ class MainActivity : ComponentActivity() {
                                     Log.e("Fonctionne", "Affichée")
                                     Compass(point = pos2, point2 = currentPos)
                                 } else {
-                                    Thermometre(point = currentPos, point2 = pos2)
+                                    Thermometre(point = currentPos, point2 = pos2, catViewModel, currentUser)
                                 }
                             }
                         }
