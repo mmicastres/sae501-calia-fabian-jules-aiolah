@@ -10,6 +10,46 @@ Cette application possède un système de récompenses au fur et à mesure que l
 
 Il sera nécessaire de se créer un compte à l'aide d'une adresse mail et d'un mot de passe pour accéder à l'application. Cela est nécessaire car l'utilisateur recevra les certificats par mail de manière à pouvoir les imprimer.
 
+## RÉPARTITION DES TÂCHES
+
+- [x] Partie “Catégorie” : *Aïolah*
+  - Création de l’[API Catégories](https://api-nodejs-sae.onrender.com/categories)
+  - **[Application]** Affichage de la liste des catégories
+  - **[Application]** Clic sur une catégorie qui redirige vers les lieux de la catégorie sélectionnée
+
+- [x] Partie “Lieux non découverts” : *Calia*
+  - Création de l’[API Lieux](https://api-nodejs-sae.onrender.com/lieux)
+  - **[Application]** Affichage de la liste des lieux (tous)
+  - **[Application]** Clic sur un lieu qui redirige vers la fiche de ce lieu
+  - **[Application]** Affichage de la liste des lieux en fonction de la catégorie choisie
+  - Modification de l’API Lieux
+
+- [x] Partie “Carte” : *Fabian*
+  - **[Application]** Affichage de la carte lors du lancement de l’application 
+
+- [x] Partie “Boussole & Thermomètre” : *Jules & Fabian*
+  - **[Application]** Switch entre la page du lieu mystère choisi et la boussole 
+  - **[Application]** Affichage d’une boussole lorsque l’utilisateur choisit un lieu 
+  - **[Application]** Switch de Boussole à Thermomètre lorsque l’utilisateur arrive à moins de cent mètres du lieu
+  - **[Application]** Affichage du thermomètre
+
+- [x] Partie “Admin” : *Calia & Aïolah*
+  - Création de l’API liée au site d’administration
+  - **[Site d'administration]** Création des interfaces : page de connexion au site d’administration, page affichant la liste des lieux, page d’ajout d'un lieu et page de modification d’un lieu
+  - **[Site d'administration]** Fonctions de connexion, d’ajout d’un lieu dans la base de données (bdd), modification d’un lieu de la bdd et suppression de lieu déjà présent dans la bdd
+     
+- [x] Partie “Connexion & Profil” : *Jules*
+  - Création de la BDD Firebase pour les utilisateurs
+  - **[Application]** Affichage et traitement des formulaires d’inscription et de connexion à l’application
+  - **[Application]** Affichage du profil après la connexion
+
+- [x] Partie “Lieu découvert” : *Calia*
+  - **[Application]** Affichage de la fiche du lieu découvert
+  - Modification de l’API Lieux 
+
+- [x] Partie “Collection” : *Jules & Fabian*
+  - **[Application]** Après scan du QR code : affichage des détails d'un lieu et ajout du lieu découvert dans la bdd
+
 ## ETUDE ET ANALYSE DU BESOIN
 
 - [Dossier](https://drive.google.com/file/d/1BE6ElyoEzDoLX1qG9Wxyk7S6qlv9tJjd/view?usp=sharing)
