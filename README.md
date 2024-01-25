@@ -15,7 +15,7 @@ Il sera nécessaire de se créer un compte à l'aide d'une adresse mail et d'un 
 - [Maquette interactive](https://www.figma.com/proto/eb2jVZ2wBG65SzdeitfkCj/Maquettes?page-id=112%3A1263&type=design&node-id=126-887&viewport=307%2C396%2C0.23&t=aC1iHGlWLdDdAqOH-1&scaling=scale-down&starting-point-node-id=126%3A887&mode=design)
 - [Maquette](https://www.figma.com/file/eb2jVZ2wBG65SzdeitfkCj/Maquettes?type=design&node-id=112%3A1263&mode=design&t=svda4gCIyw66cpDU-1)
 
-## LIRABLES CONCEPTION
+## LIVRABLES CONCEPTION
 
 - [Diagramme bêtes à cornes](https://drive.google.com/file/d/17680dEitnraFn44eEiCdIYYVlT9hDzV9/view?usp=sharing)
 - [Liste des exigences (MoSCoW)](https://drive.google.com/file/d/1aBR2aIVle5xREsTTs_tqX8pkloJbfmX3/view?usp=sharing)
