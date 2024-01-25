@@ -21,3 +21,9 @@ Il sera nécessaire de se créer un compte à l'aide d'une adresse mail et d'un 
 - [Liste des exigences (MoSCoW)](https://drive.google.com/file/d/1aBR2aIVle5xREsTTs_tqX8pkloJbfmX3/view?usp=sharing)
 - [Diagramme des Use Case](https://drive.google.com/file/d/1DkBzDU89QWn4l19wKV0GEn4hEDR8-cK0/view?usp=sharing)
 - [Schéma d'architecture logicielle]()
+
+## LIVRABLES GESTION DE PROJET
+
+- [Scrum Board Instantané](https://github.com/orgs/mmicastres/projects/20/views/1)
+- [Scrum Board de Sprint](https://trello.com/invite/b/n5La7cv6/ATTI5b7d23b6b91560ad4db776917f5d01d3F8BB4AEC/carte-au-tresor-organisation)
+
