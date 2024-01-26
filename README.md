@@ -43,7 +43,7 @@ Il sera nécessaire de se créer un compte à l'aide d'une adresse mail et d'un 
   - **[Application]** Affichage et traitement des formulaires d’inscription et de connexion à l’application
   - **[Application]** Affichage du profil après la connexion
 
-  - [x] Partie “QR Code” : *Fabian*
+- [x] Partie “QR Code” : *Fabian*
   -  Création des QR Codes
   - **[Application]** Fonctionnalité du scan de QR Code
 
