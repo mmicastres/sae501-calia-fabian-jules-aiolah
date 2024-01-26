@@ -49,6 +49,7 @@ Il sera nécessaire de se créer un compte à l'aide d'une adresse mail et d'un 
 
 - [x] Partie “Collection” : *Jules & Fabian*
   - **[Application]** Après scan du QR code : affichage des détails d'un lieu et ajout du lieu découvert dans la bdd
+  - **[Application]** Affichage des lieux déjà scanné dans la page collection ou d'une page indiquant qu'il n'a encore rien scanné
 
 ## DOCUMENTATION TECHNIQUE
 
@@ -69,6 +70,11 @@ L'application n'est pas disponible sur le Play Store Google. Ainsi, pour l'insta
 ## ETUDE ET ANALYSE DU BESOIN
 
 - [Dossier](https://drive.google.com/file/d/1BE6ElyoEzDoLX1qG9Wxyk7S6qlv9tJjd/view?usp=sharing)
+
+
+## DOCUMENTATION UTILISATEUR
+
+- [Dossier](https://drive.google.com/file/d/1PgxkMK_kwXDhUorqANeb1DQUOA9_6dA4/view?usp=sharing)
 
 ## LIVRABLES UX
 
