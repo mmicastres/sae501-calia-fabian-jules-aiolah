@@ -69,16 +69,15 @@ L'application n'est pas disponible sur le Play Store Google. Ainsi, pour l'insta
 7. Activer le wi-fi
 8. Lancer l'installation de l'application sur votre téléphone en appuyant sur le bouton Play vert d'Android Studio
 9. L'application se lance
-10. Félicitations, vous pouvez maintenant utiliser l'application en vous référant au mode d'emploi !
+10. Félicitations, vous pouvez maintenant utiliser l'application en vous référant au [mode d'emploi](https://drive.google.com/file/d/1PgxkMK_kwXDhUorqANeb1DQUOA9_6dA4/view?usp=sharing) !
+
+## DOCUMENTATION UTILISATEUR
+
+- [Mode d'emploi](https://drive.google.com/file/d/1PgxkMK_kwXDhUorqANeb1DQUOA9_6dA4/view?usp=sharing)
 
 ## ETUDE ET ANALYSE DU BESOIN
 
 - [Dossier](https://drive.google.com/file/d/1BE6ElyoEzDoLX1qG9Wxyk7S6qlv9tJjd/view?usp=sharing)
-
-
-## DOCUMENTATION UTILISATEUR
-
-- [Dossier](https://drive.google.com/file/d/1PgxkMK_kwXDhUorqANeb1DQUOA9_6dA4/view?usp=sharing)
 
 ## LIVRABLES UX
 
