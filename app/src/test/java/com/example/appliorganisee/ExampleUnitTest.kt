@@ -1,4 +1,4 @@
-package com.example.castresautresor
+package com.example.appliorganisee
 
 import org.junit.Test
 
