@@ -85,11 +85,11 @@ fun Thermometre(
                 .padding(16.dp)
                 .wrapContentSize(Alignment.Center)) {
 
-                Image(painter = painterResource( R.drawable.lutin_grognon), contentDescription = "vas te connecter !!", modifier = Modifier
+                Image(painter = painterResource( R.drawable.lutin_grognon), contentDescription = "Va te connecter !!", modifier = Modifier
                     .padding(0.dp, 60.dp, 0.dp, 0.dp)
                     .size(200.dp))
 
-                Text(text = "Vas te connecter !",
+                Text(text = "Va te connecter !",
                     fontWeight = FontWeight.Bold,
                     fontSize = 30.sp)
                 Button(

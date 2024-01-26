@@ -126,7 +126,7 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
 
                     bottomBar =
-                        {if(currentDestination != "jeu/{lat}&{lon}"){
+                        {if(currentDestination != "jeu/{lat}&{lon}&{idlieu}"){
 
                             if (currentDestination != null) {
                                 Log.e("currentlabel",currentDestination)

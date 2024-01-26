@@ -185,14 +185,14 @@ fun Collection(
             )
             Image(
                 painter = painterResource(R.drawable.lutin_grognon),
-                contentDescription = "vas te connecter !!",
+                contentDescription = "Va te connecter !!",
                 modifier = Modifier
                     .padding(0.dp, 60.dp, 0.dp, 0.dp)
                     .size(200.dp)
             )
 
             Text(
-                text = "Vas te connecter !",
+                text = "Va te connecter !",
                 fontWeight = FontWeight.Bold,
                 fontSize = 30.sp
             )
