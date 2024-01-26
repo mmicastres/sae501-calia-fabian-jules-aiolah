@@ -34,6 +34,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.navigation.NavHostController
 import com.example.appliorganisee.CatViewModel
 import com.example.appliorganisee.QrCodeAnalyzer
 import com.example.appliorganisee.R
@@ -41,9 +42,15 @@ import com.google.firebase.auth.FirebaseUser
 
 
 @Composable
-fun ShowQRCode(catViewModel: CatViewModel, currentUser: FirebaseUser?) {
+fun ShowQRCode(
+    catViewModel: CatViewModel,
+    currentUser: FirebaseUser?,
+    navController: NavHostController,
+
+) {
     var code by remember { mutableStateOf("") }
     var hasReadCode by remember { mutableStateOf(false) }
+
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val cameraProviderFeature = remember {
@@ -75,8 +82,7 @@ fun ShowQRCode(catViewModel: CatViewModel, currentUser: FirebaseUser?) {
     ) {
         if (hasCamPermission) {
             if (hasReadCode) {
-                Text(text=code)
-                Log.e("codeduqrcode", code)
+                navController.navigate("lieudecouvert/${code}")
                 BackHandler {
 
                 }
@@ -103,12 +109,13 @@ fun ShowQRCode(catViewModel: CatViewModel, currentUser: FirebaseUser?) {
                             ContextCompat.getMainExecutor(context),
                             QrCodeAnalyzer { result ->
                                 if(result.split("/")[0] == "castres au trésor"){
+
+
+
                                     code = result.split("/")[1]
                                     Log.e("code", code)
                                     hasReadCode = true
                                     if (currentUser != null) {
-
-
                                         catViewModel.putUtil(currentUser, code)
                                     }
                                 }
@@ -140,5 +147,3 @@ fun ShowQRCode(catViewModel: CatViewModel, currentUser: FirebaseUser?) {
     }
 
 }
-
-

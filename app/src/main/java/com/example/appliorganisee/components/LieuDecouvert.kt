@@ -1,5 +1,6 @@
 package com.example.appliorganisee
 
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -28,18 +29,20 @@ import coil.compose.AsyncImage
 import com.example.appliorganisee.CatViewModel
 
 @Composable
-fun LieuDecouvert(idLieu: String, viewModel: CatViewModel) {
+fun LieuDecouvert(idLieu: String, viewModel: CatViewModel, ) {
     val lieudecouvert by viewModel.lieudecouvert.collectAsStateWithLifecycle()
     val imageurl = "https://webmmi.iut-tlse3.fr/~clc4232a/S5/SAE501/" + lieudecouvert.imageUrl
     val badgeurl = "https://webmmi.iut-tlse3.fr/~clc4232a/S5/SAE501/Badge/" + lieudecouvert.badgeUrl
 
-
+    Log.e("lieuaafficheravant",lieudecouvert.toString())
     LaunchedEffect(key1 = true) { viewModel.getLieuDecouvert(idLieu) }
-
+    Log.e("lieuaafficherapres",lieudecouvert.toString())
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(2.dp),
+            .padding(2.dp)
+            .verticalScroll(rememberScrollState())
+        ,
         horizontalAlignment = Alignment.CenterHorizontally
     )
     {
@@ -88,7 +91,7 @@ fun LieuDecouvert(idLieu: String, viewModel: CatViewModel) {
         Card(
             modifier = Modifier
                 .width(300.dp)
-                .verticalScroll(rememberScrollState()), // Ajout du défilement vertical
+               , // Ajout du défilement vertical
             shape = RoundedCornerShape(20)
         ) {
             Text(
@@ -98,7 +101,8 @@ fun LieuDecouvert(idLieu: String, viewModel: CatViewModel) {
                 textAlign = TextAlign.Justify
             )
         }
-
+        Spacer(modifier = Modifier.height(30.dp))
     }
+    Spacer(modifier = Modifier.height(30.dp))
 }
 

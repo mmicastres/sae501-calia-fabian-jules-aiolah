@@ -6,22 +6,41 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+
+import androidx.compose.foundation.layout.Row
+
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material.icons.automirrored.outlined.ArrowBack
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -84,8 +103,7 @@ class MainActivity : ComponentActivity() {
 
         lateinit var auth: FirebaseAuth
         auth = Firebase.auth
-        var deconnecte = mutableStateOf(true);
-
+        var deconnecte = mutableStateOf(auth.currentUser == null);
         super.onCreate(savedInstanceState)
         if (checkLocationPermission()) {
             startLocationUpdates()
@@ -104,25 +122,32 @@ class MainActivity : ComponentActivity() {
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentDestination = navBackStackEntry?.destination?.route
 
-                // A REMPLACER AVEC IDLIEU
-                val TEMPORAIRE = 1
 
                 Scaffold(
+
                     bottomBar =
-                    { BottomNavigation(backgroundColor = Vert) {
-                        destinations.forEach { screen ->
-                            BottomNavigationItem(
-                                icon = {
-                                    androidx.compose.material3.Icon(
-                                        painter = painterResource(screen.icon), "Icône",
-                                        modifier = Modifier.height(22.dp).padding(bottom = 7.dp)
-                                    )
-                                },
-                                label = { Text(screen.label) },
-                                selected = false,
-                                onClick = { navController.navigate(screen.destination) })
-                        }}
-                    }){ innerPadding ->
+                        {if(currentDestination != "jeu/{lat}&{lon}"){
+
+                            if (currentDestination != null) {
+                                Log.e("currentlabel",currentDestination)
+                            }
+                            BottomNavigation(backgroundColor = Vert) {
+                                destinations.forEach { screen ->
+                                    BottomNavigationItem(
+                                        icon = {
+                                            androidx.compose.material3.Icon(
+                                                painter = painterResource(screen.icon), "Icône",
+                                                modifier = Modifier.height(22.dp)
+                                                    .padding(bottom = 7.dp)
+                                            )
+                                        },
+                                        label = { Text(screen.label) },
+                                        selected = false,
+                                        onClick = { navController.navigate(screen.destination) })
+                                }
+                            }
+                        }}){ innerPadding ->
+
                     NavHost(navController = navController, startDestination = "Accueil") {
                         Modifier.padding(innerPadding)
 
@@ -133,7 +158,7 @@ class MainActivity : ComponentActivity() {
                         composable("Accueil"){ Accueil(homeScreenMapView)}
 
                         composable("Profil") {
-
+                            Log.e("currentuser", currentUser.toString())
                             if (deconnecte.value == false) {
                                 Column() {
 
@@ -141,14 +166,58 @@ class MainActivity : ComponentActivity() {
                                         auth.currentUser?.let {
                                             catViewModel.postUtil(it)
                                         }
-                                        Text(text = currentUser!!.email.toString())
+                                        Column(
+                                            modifier = Modifier
+                                                .fillMaxSize()
+                                                .padding(16.dp)
+                                        ) {
+
+                                            currentUser!!.email?.let { it1 -> UserInformationItem(icon = Icons.Default.Email, label = "Email", value = it1) }
+
+
+                                            Button(
+                                                onClick = {
+                                                    deconnecte.value = true; currentUser = null; auth.signOut()
+                                                },
+                                                colors = ButtonDefaults.buttonColors(
+                                                   Color(0xFFEEBD0F)
+                                                ),
+                                                modifier = Modifier
+
+                                                    .fillMaxWidth()
+                                                    .padding(top = 16.dp),
+                                            ) {
+                                                Icon(imageVector = Icons.AutoMirrored.Outlined.ArrowBack, contentDescription = null)
+                                                Spacer(modifier = Modifier.width(8.dp))
+                                                Text(text = "Déconnexion")
+
+                                            }
+                                        }
                                         Button(onClick = {
-                                            deconnecte.value = true; currentUser = null;
+                                            deconnecte.value = true; currentUser = null; auth.signOut()
                                         }) {
                                             Text(text = "Déconnexion")
                                         }
                                     }else{
-                                        Text(text = "Current User est vide")
+                                        Column(
+                                            modifier = Modifier.fillMaxWidth(),
+                                            verticalArrangement = Arrangement.SpaceAround,
+                                            horizontalAlignment = Alignment.CenterHorizontally
+                                        ) {
+                                            Image(
+                                                painter = painterResource(R.drawable.lutin_grognon_content),
+                                                contentDescription = "t'as rien",
+                                                modifier = Modifier
+                                                    .padding(0.dp, 60.dp, 0.dp, 0.dp)
+                                                    .size(500.dp)
+                                            )
+
+                                            androidx.compose.material.Text(
+                                                text = "Bravo, tu es connecté !",
+                                                fontWeight = FontWeight.Bold,
+                                                fontSize = 30.sp
+                                            )
+                                        }
                                     }
                                 }
                             }else{
@@ -185,26 +254,33 @@ class MainActivity : ComponentActivity() {
 
                         composable(Destination.Jeu.destination, arguments = listOf(
                             navArgument("lat") { type = NavType.StringType },
-                            navArgument("lon") { type = NavType.StringType } )){
+                            navArgument("lon") { type = NavType.StringType },
+
+                        )){
                             var lat = navBackStackEntry?.arguments?.getString("lat")?.toDouble()
                             var lon = navBackStackEntry?.arguments?.getString("lon")?.toDouble()
+
                             if(lat != null && lon != null){
                                 var pos2 = Position(lat, lon)
                                 if (currentPos.getDistance(pos2).toInt() > 99) {
                                     Log.e("Fonctionne", "Affichée")
                                     Compass(point = pos2, point2 = currentPos)
                                 } else {
-                                    Thermometre(point = currentPos, point2 = pos2, catViewModel, currentUser)
+                                    Thermometre(point = currentPos, point2 = pos2, catViewModel, currentUser, navController)
                                 }
                             }
                         }
 
                         composable(Destination.LieuDecouvert.destination) {
-                            // A REMPLACER AVEC L'ID LIEU OBTENU AVEC LE SCAN DU QR CODE
-                            LieuDecouvert(TEMPORAIRE.toString(),  catViewModel)
+                                backStackEntry ->
+                            LieuDecouvert(backStackEntry.arguments?.getString("idLieu") ?: "", catViewModel)
+
                         }
 
-                        composable("Collection") { Collection() }
+                        composable("Collection") {
+
+                            Collection(catViewModel,currentUser, navController)
+                        }
                     }
                 }
 
@@ -222,7 +298,7 @@ class MainActivity : ComponentActivity() {
         object Categorie: Destination("categorie/{id}", "Catégorie", R.drawable.icone_collection)
         object LieuxMystere : Destination("lieux", "LieuxMystere", R.drawable.icone_collection)
         object DetailLieuMystere : Destination("lieu/{idLieu}", "LieuMystere", R.drawable.icone_collection)
-        object Jeu  : Destination("jeu/{lat}&{lon}", "Jeu", R.drawable.icone_collection)
+        object Jeu  : Destination("jeu/{lat}&{lon}&{idlieu}", "Jeu", R.drawable.icone_collection)
         object LieuDecouvert : Destination("lieudecouvert/{idLieu}", "LieuxDecouvert", R.drawable.icone_collection)
     }
     val destinations = listOf(Destination.Profil, Destination.Categories, Destination.Collection)
@@ -287,8 +363,9 @@ class MainActivity : ComponentActivity() {
          lat = lastLocation?.latitude
 
             if(lat != null){
-                currentPos.latitude = lat!!
-                currentPos.longitude = lon!!
+                currentPos = Position(lat!!, lon!!)
+
+
 
                 currentGeoPoint.latitude = lat!!
                 currentGeoPoint.longitude = lon!!}
@@ -299,6 +376,25 @@ class MainActivity : ComponentActivity() {
 
     companion object {
         const val PERMISSION_REQUEST_CODE = 101
+    }
+    @Composable
+    fun UserInformationItem(icon: ImageVector, label: String, value: String) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // Affichage de l'icône
+            Icon(imageVector = icon, contentDescription = null, tint = Color.Gray)
+            Spacer(modifier = Modifier.width(8.dp))
+
+            // Affichage du libellé et de la valeur
+            Column {
+                Text(text = label, color = Color.Gray, fontSize = 12.sp)
+                Text(text = value, fontSize = 16.sp)
+            }
+        }
     }
 }
 

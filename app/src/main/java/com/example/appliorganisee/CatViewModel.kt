@@ -31,6 +31,7 @@ class CatViewModel: ViewModel() {
     val utilisateur = MutableStateFlow(Util())
     val lieuxutilisateur = MutableStateFlow<List<LieuxDecouvert>>(listOf())
     val lieudecouvert =  MutableStateFlow(ApiLieux())
+    val lieuxdecouvert =  MutableStateFlow<List<ApiLieux>>(listOf())
 
     // Se lance à la création de la classe MainActivity
 
@@ -62,8 +63,9 @@ class CatViewModel: ViewModel() {
 
     fun getLieuDecouvert(idLieu: String){
         viewModelScope.launch {
-            lieudecouvert.value= api.lieudecouvert(idLieu)
+            lieudecouvert.value = api.lieudecouvert(idLieu)
         }
+
     }
 
     // Se lance à l'inscription

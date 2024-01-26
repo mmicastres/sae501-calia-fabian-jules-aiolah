@@ -91,21 +91,12 @@ fun DetailLieuMystere(
             onClick = {
                 val lat = lieumystere.lat;
                 val lon = lieumystere.long;
-                navController.navigate("jeu/${lat}&${lon}")},
+                navController.navigate("jeu/${lat}&${lon}&${lieumystere.idLieu}")},
             colors = ButtonDefaults.buttonColors(Color(0xFFEEBD0F))
         ) {
             Text("Commencer la recherche", fontSize = 17.sp)
         }
 
-
-        Button(onClick = {
-            if (currentUser != null) {
-                viewModel.putUtil(currentUser)
-            }
-
-        }) {
-            Text(text = "C'est de l'art ça je reconnais")
-        }
 
     }
 }

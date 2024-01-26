@@ -11,11 +11,22 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -33,7 +44,10 @@ import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
+import androidx.navigation.NavHostController
 import com.example.appliorganisee.CatViewModel
 import com.google.firebase.auth.FirebaseUser
 
@@ -43,7 +57,9 @@ fun Thermometre(
     point: Position,
     point2: Position,
     catViewModel: CatViewModel,
-    currentUser: FirebaseUser?
+    currentUser: FirebaseUser?,
+    navController: NavHostController,
+
 ) {
 
     val distance_point = point.getDistance(point2).toInt()
@@ -60,7 +76,41 @@ fun Thermometre(
     //val widthH = configuration.screenWidthDp.toFloat() * modificator
     val heightmodificator = modificator / 1.3
     if (QrcodeVisible) {
-        ShowQRCode(catViewModel, currentUser)
+        if(currentUser != null) {
+            ShowQRCode(catViewModel, currentUser, navController)
+        }
+        else{
+            Column( modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+                .wrapContentSize(Alignment.Center)) {
+
+                Image(painter = painterResource( R.drawable.lutin_grognon), contentDescription = "vas te connecter !!", modifier = Modifier
+                    .padding(0.dp, 60.dp, 0.dp, 0.dp)
+                    .size(200.dp))
+
+                Text(text = "Vas te connecter !",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 30.sp)
+                Button(
+                    onClick = {
+                        navController.navigate("Profil")
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        Color(0xFFEEBD0F)
+                    ),
+                    modifier = Modifier
+
+                        .fillMaxWidth()
+                        .padding(top = 16.dp),
+                ) {
+                    Icon(imageVector = Icons.Default.Person, contentDescription = null)
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(text = "Page connexion")
+
+                }
+            }
+        }
     }
     else{
     BottomRightIconButton(){ QrcodeVisible = !QrcodeVisible
@@ -163,7 +213,7 @@ fun BottomRightIconButton(onClick: () -> Unit) {
 }
 @Composable
 fun drawFlames(taille: Int) {
-    val flameCount = 70 // Nombre de flammes
+    val flameCount = 150 // Nombre de flammes
     val screenHeight = LocalConfiguration.current.screenHeightDp.dp
 
     for (i in 0 until flameCount) {
@@ -182,7 +232,7 @@ fun drawFlames(taille: Int) {
 
 @Composable
 fun drawFlakes(taille: Int) {
-    val flakeCount = 70
+    val flakeCount = 150
     val screenHeight = LocalConfiguration.current.screenHeightDp.dp
 
     for (i in 0 until flakeCount) {
